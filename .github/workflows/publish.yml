@@ -19,8 +19,8 @@ jobs:
         git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
     - name: install
       run: yarn --immutable
-    - name: build
-      run: yarn build
+    - name: build and test
+      run: yarn test
     - name: branch
       run: |
         git fetch origin
