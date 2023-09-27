@@ -1,0 +1,27 @@
+{
+  "name": "@scdl/client",
+  "version": "0.1.0",
+  "description": "Fetches a client ID for use with the SoundCloud API",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "repository": "git@github.com:ducktrshessami/scdl-client.git",
+  "author": "ducktrshessami",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsup",
+    "pretest": "yarn build",
+    "test": "mocha"
+  },
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs",
+    "types": "./dist/index.d.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.7.1",
+    "mocha": "^10.2.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  }
+}
