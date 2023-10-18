@@ -1,6 +1,6 @@
 {
   "name": "@scdl/fetch-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fetches a client ID for use with the SoundCloud API",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
