@@ -1,15 +1,16 @@
 import { ClientFetchError } from "./error";
 
-function iteratorLast<T>(it: IterableIterator<T>): T | null {
-    let item: IteratorResult<T>;
-    let last: T;
+function matchLast(str: string, pattern: RegExp): RegExpMatchArray | null {
+    let current: RegExpMatchArray | null;
+    let last: RegExpMatchArray | null = null;
     do {
-        item = it.next();
-        if (!item.done) {
-            last = item.value;
+        current = pattern.exec(str);
+        if (current) {
+            last = current;
         }
-    } while (!item.done);
-    return last! ?? null;
+    }
+    while (current);
+    return last;
 }
 
 export async function fetchClientID(): Promise<string> {
@@ -18,12 +19,11 @@ export async function fetchClientID(): Promise<string> {
         throw new ClientFetchError(`Initial request failed: ${initial.status} ${initial.statusText}`);
     }
     const initialBody = await initial.text();
-    const results = initialBody.matchAll(/<script\s+crossorigin\s+src=["'](https?:\/\/[^"']+)["']><\/script>/gi);
-    const lastUrl = iteratorLast(results);
-    if (!lastUrl) {
+    const results = matchLast(initialBody, /<script\s+crossorigin\s+src=["'](https?:\/\/[^"']+)["']><\/script>/gi);
+    if (!results) {
         throw new ClientFetchError("Failed to parse script URL");
     }
-    const script = await fetch(lastUrl[1]);
+    const script = await fetch(results[1]);
     if (script.status >= 400) {
         throw new ClientFetchError(`Script request failed: ${script.status} ${script.statusText}`);
     }
