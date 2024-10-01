@@ -14,9 +14,9 @@
     "test": "mocha"
   },
   "exports": {
+    "types": "./dist/index.d.ts",
     "require": "./dist/index.js",
-    "import": "./dist/index.mjs",
-    "types": "./dist/index.d.ts"
+    "import": "./dist/index.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.7.4",
