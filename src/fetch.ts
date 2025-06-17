@@ -15,7 +15,7 @@ function matchLast(str: string, pattern: RegExp): RegExpMatchArray | null {
 
 export async function fetchClientID(): Promise<string> {
     const initial = await fetch("https://soundcloud.com/");
-    if (initial.status >= 400) {
+    if (!initial.ok) {
         throw new ClientFetchError(`Initial request failed: ${initial.status} ${initial.statusText}`);
     }
     const initialBody = await initial.text();
@@ -24,7 +24,7 @@ export async function fetchClientID(): Promise<string> {
         throw new ClientFetchError("Failed to parse script URL");
     }
     const script = await fetch(results[1]);
-    if (script.status >= 400) {
+    if (!script.ok) {
         throw new ClientFetchError(`Script request failed: ${script.status} ${script.statusText}`);
     }
     const scriptBody = await script.text();
