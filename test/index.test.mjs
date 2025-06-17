@@ -1,17 +1,13 @@
-import assert from "assert";
-import { fetchClientID, testClientID } from "../dist/index.mjs";
+import { expect, expectTypeOf, test } from "vitest";
+import { fetchClientID, testClientID } from "../dist";
 
-describe("ESM", function () {
-    let clientID;
-
-    it("fetchClientID", async function () {
-        clientID = await fetchClientID();
-        assert.strictEqual(typeof clientID, "string");
-    });
-
-    it("testClientID", async function () {
-        assert(clientID);
-        assert.strictEqual(await testClientID(clientID), true);
-        assert.strictEqual(await testClientID("foobar"), false);
-    });
+let clientID;
+test("fetchClientID", async function () {
+    clientID = await fetchClientID();
+    expectTypeOf(clientID).toBeString();
+});
+test("testClientID", async function () {
+    expect(clientID).toBeDefined();
+    expect(await testClientID(clientID)).toStrictEqual(true);
+    expect(await testClientID("foobar")).toStrictEqual(false);
 });
