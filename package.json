@@ -2,26 +2,27 @@
   "name": "@scdl/fetch-client",
   "version": "1.0.3",
   "description": "Fetches a client ID for use with the SoundCloud API",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "types": "dist/index.d.cts",
   "repository": "git@github.com:ducktrshessami/scdl-fetch-client.git",
   "author": "ducktrshessami",
   "license": "MIT",
   "scripts": {
-    "build": "tsup",
+    "prebuild": "tsc --noEmit",
+    "build": "tsdown",
     "pretest": "yarn build",
     "test": "vitest"
   },
   "exports": {
-    "types": "./dist/index.d.ts",
-    "require": "./dist/index.js",
+    "types": "./dist/index.d.cts",
+    "require": "./dist/index.cjs",
     "import": "./dist/index.mjs"
   },
   "devDependencies": {
-    "@types/node": "^25.3.3",
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "@types/node": "^26.2.0",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   }
 }
