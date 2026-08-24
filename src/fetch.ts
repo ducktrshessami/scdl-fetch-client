@@ -23,7 +23,7 @@ export async function fetchClientID(): Promise<string> {
     if (!results) {
         throw new ClientFetchError("Failed to parse script URL");
     }
-    const script = await fetch(results[1]);
+    const script = await fetch(results[1]!);
     if (!script.ok) {
         throw new ClientFetchError(`Script request failed: ${script.status} ${script.statusText}`);
     }
@@ -32,5 +32,5 @@ export async function fetchClientID(): Promise<string> {
     if (!result) {
         throw new ClientFetchError(`Failed to parse client ID from script`);
     }
-    return result[1];
+    return result[1]!;
 }
